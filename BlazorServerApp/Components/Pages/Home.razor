@@ -1,0 +1,23 @@
+﻿@page "/"
+@using BlazorServerApp.Components.Shared
+@inject HttpClient Http
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<p>
+    @Header
+</p>
+<p>
+    <button @onclick="AddAccount">
+        Add ToDo
+    </button>
+</p>
+<p>
+    <button @onclick="GetAccounts">
+        Get Todo
+    </button>
+</p>
+<Table Accounts=@accounts @ref="child" />

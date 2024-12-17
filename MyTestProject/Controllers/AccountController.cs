@@ -16,12 +16,12 @@ namespace MyTestProject.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Order> Get()
+        public IEnumerable<Account> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new Order
+            return Enumerable.Range(1, 5).Select(index => new Account
             {
                 ID = index,
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                Name = index.ToString(),
             })
             .ToArray();
         }

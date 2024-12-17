@@ -1,0 +1,14 @@
+﻿@TodoApi_HostAddress = https://localhost:7120
+
+GET {{TodoApi_HostAddress}}/api/accounts
+
+###
+
+POST {{TodoApi_HostAddress}}/api/accounts
+Content-Type: application/json
+{
+  "name": "string",
+  "isComplete": true
+}
+
+###
