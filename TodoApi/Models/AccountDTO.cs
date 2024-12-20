@@ -11,7 +11,7 @@ public class AccountDTO
     new AccountDTO
     {
         id = account.Id,
-        name = account.Name,
+        name = account.AccountName,
         orders = account.Orders.Select(OrderDTO.OrderToDTO).ToList(),
     };
 
@@ -19,8 +19,7 @@ public class AccountDTO
         new Account
         {
             Id = dto.id,
-            Name = dto.name,
-            IsComplete = dto.isComplete,
-            Orders = dto.orders?.Select(OrderDTO.DTOToOrder).ToList()
+            AccountName = dto.name,
+            //Orders = dto.orders?.Select(OrderDTO.DTOToOrder).ToList()
         };
 }

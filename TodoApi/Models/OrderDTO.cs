@@ -10,16 +10,16 @@ public class OrderDTO
         new OrderDTO
         {
             id = order.Id,
-            name = order.Name,
-            account = AccountDTO.AccountToDTO(order.Account)
+            name = order.OrderName,
+            //account = AccountDTO.AccountToDTO(order.Account)
         };
     
     public static Order DTOToOrder(OrderDTO dto) =>
         new Order
         {
             Id = dto.id,
-            Name = dto.name,
-            Account = AccountDTO.DTOToAccount(dto.account)
+            OrderName = dto.name,
+            //Account = AccountDTO.DTOToAccount(dto.account)
         };
 
 }
