@@ -1,115 +1,113 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using CompanyApi.Models;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using CompanyApi.Models;
 
-//namespace CompanyApi.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class AccountsController : ControllerBase
-//    {
-//        private readonly DBContext _context;
+namespace CompanyApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountsController : ControllerBase
+    {
+        private readonly DBContext _context;
 
-//        public AccountsController(DBContext context)
-//        {
-//            _context = context;
-//        }
+        public AccountsController(DBContext context)
+        {
+            _context = context;
+        }
 
-//        [HttpGet]
-//        public async Task<ActionResult<List<AccountDTO>>> GetAccounts()
-//        {
-//            return await _context.Accounts
-//                .Select(x => ItemToDTO(x))
-//                .ToListAsync();
-//        }
+        // GET: api/Accounts1
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AccountDTO>>> GetAccounts()
+        {
+            var a =  await _context
+                .Accounts
+                .Include(a => a.Orders)
+                .Select(x => AccountDTO.AccountToDTO(x, false))
+                .ToListAsync();
+            return Ok(a);
+        }
 
-//        [HttpGet("{id}")]
-//        public async Task<ActionResult<AccountDTO>> GetAccount(long id)
-//        {
-//            var todoItem = await _context.Accounts.FindAsync(id);
+        // GET: api/Accounts1/5
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<Account>> GetAccount(int id)
+        {
+            var account = await _context.Accounts.FindAsync(id);
 
-//            if (todoItem == null)
-//            {
-//                return NotFound();
-//            }
+            if (account == null)
+            {
+                return NotFound();
+            }
 
-//            return ItemToDTO(todoItem);
-//        }
+            return account;
+        }
 
-//        [HttpPut("{id}")]
-//        public async Task<IActionResult> PutAccount(long id, AccountDTO todoDTO)
-//        {
-//            if (id != todoDTO.id)
-//            {
-//                return BadRequest();
-//            }
+        // PUT: api/Accounts1/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> PutAccount(int id, Account account)
+        {
+            if (id != account.Id)
+            {
+                return BadRequest();
+            }
 
-//            var todoItem = await _context.Accounts.FindAsync(id);
-//            if (todoItem == null)
-//            {
-//                return NotFound();
-//            }
+            _context.Entry(account).State = EntityState.Modified;
 
-//            todoItem.Name = todoDTO.name;
-//            //todoItem.IsComplete = todoDTO.isComplete;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AccountExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-//            try
-//            {
-//                await _context.SaveChangesAsync();
-//            }
-//            catch (DbUpdateConcurrencyException) when (!AccountExists(id))
-//            {
-//                return NotFound();
-//            }
+            return NoContent();
+        }
 
-//            return NoContent();
-//        }
+        // POST: api/Accounts1
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO accountDTO)
+        {
+            var account = AccountDTO.DTOToAccount(accountDTO);
+            _context.Accounts.Add(account);
+            await _context.SaveChangesAsync();
 
-//        [HttpPost]
-//        public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO dto)
-//        {
-//            var accountItem = AccountDTO.DTOToAccount(dto);
+            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
+        }
 
-//            _context.Accounts.Add(accountItem);
-//            await _context.SaveChangesAsync();
+        // DELETE: api/Accounts1/5
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteAccount(int id)
+        {
+            var account = await _context.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
 
-//            return CreatedAtAction(
-//                nameof(GetAccount),
-//                new { id = accountItem.Id },
-//                ItemToDTO(accountItem));
-//        }
+            _context.Accounts.Remove(account);
+            await _context.SaveChangesAsync();
 
-//        [HttpDelete("{id}")]
-//        public async Task<IActionResult> DeleteAccount(long id)
-//        {
-//            var todoItem = await _context.Accounts.FindAsync(id);
-//            if (todoItem == null)
-//            {
-//                return NotFound();
-//            }
+            return NoContent();
+        }
 
-//            _context.Accounts.Remove(todoItem);
-//            await _context.SaveChangesAsync();
-
-//            return NoContent();
-//        }
-
-//        private bool AccountExists(long id)
-//        {
-//            return _context.Accounts.Any(e => e.Id == id);
-//        }
-
-//        private static AccountDTO ItemToDTO(Account account) =>
-//           new AccountDTO
-//           {
-//               id = account.Id,
-//               name = account.Name,
-//               orders = account.Orders?.Select(a => OrderDTO.OrderToDTO(a)).ToList(),
-//           };
-//    }
-//}
+        private bool AccountExists(int id)
+        {
+            return _context.Accounts.Any(e => e.Id == id);
+        }
+    }
+}

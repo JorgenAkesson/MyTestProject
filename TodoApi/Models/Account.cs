@@ -1,4 +1,6 @@
-﻿namespace CompanyApi.Models;
+﻿using Newtonsoft.Json;
+
+namespace CompanyApi.Models;
 
 public class Account
 {

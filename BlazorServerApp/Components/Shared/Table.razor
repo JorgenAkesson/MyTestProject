@@ -18,8 +18,8 @@
         <GridColumn TItem="AccountDTO" HeaderText="Id" PropertyName="Id" SortKeySelector="item => item.Id">
             @context.Id
         </GridColumn>
-        <GridColumn TItem="AccountDTO" HeaderText="Employee Name" PropertyName="Name" SortKeySelector="item => item.Name">
-            @context.Name
+        <GridColumn TItem="AccountDTO" HeaderText="Employee Name" PropertyName="Name" SortKeySelector="item => item.AccountName">
+            @context.AccountName
         </GridColumn>
     </GridColumns>
 
@@ -34,7 +34,7 @@
     <ul>
         @foreach (var emp in selectedAccount)
         {
-            <li>@emp.Name</li>
+            <li>@emp.AccountName</li>
         }
     </ul>
 </div>

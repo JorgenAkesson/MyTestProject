@@ -16,7 +16,7 @@ namespace BlazorServerApp.Services
             _httpClientFactory=httpClientFactory;
         }
 
-        public void AddAccount( AccountDTO account)
+        public void AddAccount(AccountDTO account)
         {
             var jsonAccount = JsonContent.Create(account);
             var httpClient = _httpClientFactory.CreateClient("Company");
@@ -33,18 +33,14 @@ namespace BlazorServerApp.Services
             {
                 using var contentStream = await httpResponseMessage.Content.ReadAsStreamAsync();
 
-                //contentStream.Position = 0;
-                //using (StreamReader reader = new StreamReader(contentStream, Encoding.UTF8))
-                //{
-                //    var a =  reader.ReadToEnd();
-                //}
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var accounts = JsonSerializer.Deserialize<List<AccountDTO>>(contentStream, options);
 
-                var accounts = await JsonSerializer.DeserializeAsync
-                    <List<AccountDTO>>(contentStream);
-
-                return accounts.ToList();
+                var a = accounts.ToList();
+                return a;
             }
             return null;
         }
+
     }
 }

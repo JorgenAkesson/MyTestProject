@@ -37,7 +37,7 @@ namespace BlazorServerApp.Components.Pages
 
         private void AddAccount(MouseEventArgs e)
         {
-            MyService.AddAccount(new AccountDTO() { name = "Kalle"});
+            MyService.AddAccount(new AccountDTO() { AccountName = "MyAccount", Orders = new List<OrderDTO> { new OrderDTO { OrderName = "MyOrder" } }  });
         }
     }
 }

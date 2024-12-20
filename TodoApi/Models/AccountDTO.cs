@@ -1,25 +1,26 @@
-﻿namespace CompanyApi.Models;
+﻿using Newtonsoft.Json;
+
+namespace CompanyApi.Models;
 
 public class AccountDTO
 {
-    public int id { get; set; }
-    public string name { get; set; }
-    public bool isComplete { get; set; }
-    public ICollection<OrderDTO>? orders { get; set; }
+    public int Id { get; set; }
+    public string AccountName { get; set; }
+    public ICollection<OrderDTO>? Orders { get; set; }
 
-    public static AccountDTO AccountToDTO(Account account) =>
+    public static AccountDTO AccountToDTO(Account account, bool stop = false) =>
     new AccountDTO
     {
-        id = account.Id,
-        name = account.AccountName,
-        orders = account.Orders.Select(OrderDTO.OrderToDTO).ToList(),
+        Id = account.Id,
+        AccountName = account.AccountName,
+        Orders = !stop ? account.Orders.Select(x => OrderDTO.OrderToDTO(x, true)).ToList() : null,
     };
 
     public static Account DTOToAccount(AccountDTO dto) =>
         new Account
         {
-            Id = dto.id,
-            AccountName = dto.name,
-            //Orders = dto.orders?.Select(OrderDTO.DTOToOrder).ToList()
+            Id = dto.Id,
+            AccountName = dto.AccountName,
+            Orders = dto.Orders.Select(OrderDTO.DTOToOrder).ToList()
         };
 }
