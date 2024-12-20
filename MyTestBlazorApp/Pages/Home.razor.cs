@@ -8,15 +8,15 @@ namespace MyTestBlazorApp.Properties.Pages
 
         private string Message = "Kalle";
 
-        protected override Task OnInitializedAsync()
-        {
-            Init();
-            return base.OnInitializedAsync();
-        }
+        //protected override Task OnInitializedAsync()
+        //{
+        //    Init();
+        //    return base.OnInitializedAsync();
+        //}
 
         private async void Init()
         {
-            orderServiceEndpoint = $"{Config.GetValue<string>("BackendUrl")}/Order";
+            //orderServiceEndpoint = $"{Config.GetValue<string>("BackendUrl")}/Order";
 
             await GetOrderItems();
         }

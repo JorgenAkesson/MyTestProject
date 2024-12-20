@@ -6,9 +6,8 @@ using CompanyApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TodoApi.Models;
 
-namespace TodoApi.Controllers
+namespace CompanyApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,7 +20,6 @@ namespace TodoApi.Controllers
             _context = context;
         }
 
-        // GET: api/Accounts
         [HttpGet]
         public async Task<ActionResult<List<AccountDTO>>> GetAccounts()
         {
@@ -30,7 +28,6 @@ namespace TodoApi.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/Accounts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AccountDTO>> GetAccount(long id)
         {
@@ -44,8 +41,6 @@ namespace TodoApi.Controllers
             return ItemToDTO(todoItem);
         }
 
-        // PUT: api/Accounts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount(long id, AccountDTO todoDTO)
         {
@@ -75,27 +70,20 @@ namespace TodoApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Account
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO todoDTO)
+        public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO dto)
         {
-            var todoItem = new Account
-            {
-                IsComplete = todoDTO.isComplete,
-                Name = todoDTO.name
-            };
+            var accountItem = AccountDTO.DTOToAccount(dto);
 
-            _context.Accounts.Add(todoItem);
+            _context.Accounts.Add(accountItem);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(
                 nameof(GetAccount),
-                new { id = todoItem.Id  },
-                ItemToDTO(todoItem));
+                new { id = accountItem.Id },
+                ItemToDTO(accountItem));
         }
 
-        // DELETE: api/Account/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(long id)
         {
@@ -116,12 +104,13 @@ namespace TodoApi.Controllers
             return _context.Accounts.Any(e => e.Id == id);
         }
 
-        private static AccountDTO ItemToDTO(Account todoItem) =>
+        private static AccountDTO ItemToDTO(Account account) =>
            new AccountDTO
            {
-               id = todoItem.Id,
-               name = todoItem.Name,
-               isComplete = todoItem.IsComplete
+               id = account.Id,
+               name = account.Name,
+               isComplete = account.IsComplete,
+               orders = account.Orders?.Select(a => OrderDTO.OrderToDTO(a)).ToList(),
            };
     }
 }
