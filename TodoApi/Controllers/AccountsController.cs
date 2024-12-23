@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CompanyApi.Models;
+using CompanyApi.Services;
 
 namespace CompanyApi.Controllers
 {
@@ -14,13 +15,15 @@ namespace CompanyApi.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly DBContext _context;
+        private readonly IMessageService _messageService;
 
-        public AccountsController(DBContext context)
+        public AccountsController(DBContext context, IMessageService messageService)
         {
             _context = context;
+            _messageService=messageService;
         }
 
-        // GET: api/Accounts1
+        // GET: api/Accounts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AccountDTO>>> GetAccounts()
         {
@@ -32,9 +35,9 @@ namespace CompanyApi.Controllers
             return Ok(a);
         }
 
-        // GET: api/Accounts1/5
+        // GET: api/Accounts/5
         [HttpGet("{Id}")]
-        public async Task<ActionResult<Account>> GetAccount(int id)
+        public async Task<ActionResult<AccountDTO>> GetAccount(int id)
         {
             var account = await _context.Accounts.FindAsync(id);
 
@@ -43,18 +46,20 @@ namespace CompanyApi.Controllers
                 return NotFound();
             }
 
-            return account;
+            return AccountDTO.AccountToDTO(account);
         }
 
-        // PUT: api/Accounts1/5
+        // PUT: api/Accounts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{Id}")]
-        public async Task<IActionResult> PutAccount(int id, Account account)
+        public async Task<IActionResult> PutAccount(int id, AccountDTO dto)
         {
-            if (id != account.Id)
+            if (id != dto.Id)
             {
                 return BadRequest();
             }
+
+            var account = AccountDTO.DTOToAccount(dto);
 
             _context.Entry(account).State = EntityState.Modified;
 
@@ -80,13 +85,18 @@ namespace CompanyApi.Controllers
         // POST: api/Accounts1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO accountDTO)
+        public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO dto)
         {
-            var account = AccountDTO.DTOToAccount(accountDTO);
+            var account = AccountDTO.DTOToAccount(dto);
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
+            if(dto.Orders.Any())
+            {
+                _messageService.SendMessageDirectWithRabbitMQ("NewProduct", "ProductName");
+            }
+
+            return CreatedAtAction("GetAccount", new { id = account.Id }, dto);
         }
 
         // DELETE: api/Accounts1/5

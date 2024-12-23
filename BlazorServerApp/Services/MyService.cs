@@ -26,8 +26,7 @@ namespace BlazorServerApp.Services
         public async Task<List<AccountDTO>> GetAccounts()
         {
             var httpClient = _httpClientFactory.CreateClient("Company");
-            var httpResponseMessage = await httpClient.GetAsync(
-                "/api/Accounts");
+            var httpResponseMessage = await httpClient.GetAsync("/api/Accounts");
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {

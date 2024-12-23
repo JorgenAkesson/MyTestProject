@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CompanyApi.Models;
+using CompanyApi.Services;
 
 namespace CompanyApi.Controllers
 {
@@ -14,13 +15,15 @@ namespace CompanyApi.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly DBContext _context;
+        private readonly IMessageService _messageService;
 
-        public OrdersController(DBContext context)
+        public OrdersController(DBContext context, IMessageService messageService)
         {
             _context = context;
+            _messageService=messageService;
         }
 
-        // GET: api/Orders1
+        // GET: api/Orders
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()
         {
@@ -31,9 +34,9 @@ namespace CompanyApi.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/Orders1/5
+        // GET: api/Orders/5
         [HttpGet("{Id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<ActionResult<OrderDTO>> GetOrder(int id)
         {
             var order = await _context.Orders.FindAsync(id);
 
@@ -42,19 +45,20 @@ namespace CompanyApi.Controllers
                 return NotFound();
             }
 
-            return order;
+            return OrderDTO.OrderToDTO(order);
         }
 
-        // PUT: api/Orders1/5
+        // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{Id}")]
-        public async Task<IActionResult> PutOrder(int id, Order order)
+        public async Task<IActionResult> PutOrder(int id, OrderDTO dto)
         {
-            if (id != order.Id)
+            if (id != dto.Id)
             {
                 return BadRequest();
             }
 
+            var order = OrderDTO.DTOToOrder(dto);
             _context.Entry(order).State = EntityState.Modified;
 
             try
@@ -79,12 +83,15 @@ namespace CompanyApi.Controllers
         // POST: api/Orders1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<OrderDTO>> PostOrder(OrderDTO dto)
         {
+            var order = OrderDTO.DTOToOrder(dto);
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+            _messageService.SendMessageDirectWithRabbitMQ("NewProduct", "ProductName");
+
+            return CreatedAtAction("GetOrder", new { id = order.Id }, dto);
         }
 
         // DELETE: api/Orders1/5

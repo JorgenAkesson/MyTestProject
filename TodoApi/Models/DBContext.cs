@@ -12,7 +12,6 @@ public class DBContext : DbContext
 
     public DbSet<Account> Accounts { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
-    public DbSet<Product> Products { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
