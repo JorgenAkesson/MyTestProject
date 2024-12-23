@@ -1,15 +1,15 @@
-using CompanyApi.Models;
-using CompanyApi.Services;
 using MassTransit;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
+using PatientApi.Models;
+using PatientApi.Services;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
-builder.Services.AddDbContext<DBContext>(opt => opt.UseInMemoryDatabase("AccountDB"));
+builder.Services.AddDbContext<DBContext>(opt => opt.UseInMemoryDatabase("PatientDB"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

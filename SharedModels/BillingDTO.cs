@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SharedModels
 {
-    public class OrderDto
+    public class BillingDTO
     {
-        public string ProductName { get; set; }
+        public string BillingName { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
     }

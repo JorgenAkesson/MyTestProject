@@ -1,0 +1,6 @@
+@HostAddress = http://localhost:5248
+
+GET {{HostAddress}}/billing/
+Accept: application/json
+
+###

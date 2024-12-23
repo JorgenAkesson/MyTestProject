@@ -1,10 +1,10 @@
-﻿using CompanyApi.Models;
+﻿using PatientApi.Models;
 
-namespace CompanyApi.Services
+namespace PatientApi.Services
 {
     public interface IMessageService
     {
-        void SendMessageWithMassTransit(AccountDTO dto);
-        void SendMessageWithRabbitMQ(string messageType, string productName);
+        void SendMessageWithMassTransit(PatientDTO dto);
+        void SendMessageWithRabbitMQ(string messageType, string text);
     }
 }

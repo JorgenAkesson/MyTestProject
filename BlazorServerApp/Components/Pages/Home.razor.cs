@@ -1,8 +1,8 @@
 using BlazorServerApp.Components.Shared;
 using BlazorServerApp.Services;
-using CompanyApi.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using PatientApi.Models;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -16,7 +16,7 @@ namespace BlazorServerApp.Components.Pages
         private Table child;
 
         private string Header = "Welcome to your new app.";
-        private List<AccountDTO> accounts = new List<AccountDTO>();
+        private List<PatientDTO> patients = new List<PatientDTO>();
 
         protected override Task OnInitializedAsync()
         {
@@ -28,21 +28,21 @@ namespace BlazorServerApp.Components.Pages
         {
         }
 
-        private async void GetAccounts(MouseEventArgs e)
+        private async void GetPatients(MouseEventArgs e)
         {
-            accounts = await MyService.GetAccounts();
+            patients = await MyService.GetPatients();
             await InvokeAsync(StateHasChanged);
             child.Update();
         }
 
-        private void AddAccount(MouseEventArgs e)
+        private void AddPatient(MouseEventArgs e)
         {
-            MyService.AddAccount(new AccountDTO()
+            MyService.AddPatient(new PatientDTO()
             {
-                AccountName = "MyAccount",
-                Orders = new List<OrderDTO>
-                    { new OrderDTO
-                        { OrderName = "MyOrder"}}
+                PatientName = "MyPatient",
+                Appointments = new List<AppointmentDTO>
+                    { new AppointmentDTO
+                        { AppointmentName = "MyAppointment"}}
             });
         }
     }

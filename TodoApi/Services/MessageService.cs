@@ -1,10 +1,10 @@
-﻿using CompanyApi.Models;
-using MassTransit;
+﻿using MassTransit;
+using PatientApi.Models;
 using RabbitMQ.Client;
 using SharedModels;
 using System.Text;
 
-namespace CompanyApi.Services
+namespace PatientApi.Services
 {
     public class MessageService : IMessageService
     {
@@ -18,24 +18,24 @@ namespace CompanyApi.Services
             _publishEndpoint=publishEndpoint;
         }
 
-        public async void SendMessageWithMassTransit(AccountDTO dto)
+        public async void SendMessageWithMassTransit(PatientDTO dto)
         {
-            var orderDto = new OrderDto()
+            var patientAppointment = new BillingDTO()
             {
-                ProductName = dto.AccountName,
+                BillingName = dto.PatientName,
                 Quantity = 1,
                 Price = 2
             };
-            await _publishEndpoint.Publish<OrderCreated>(new
+            await _publishEndpoint.Publish<BillingCreated>(new
             {
                 Id = 1,
-                orderDto.ProductName,
-                orderDto.Quantity,
-                orderDto.Price
+                patientAppointment.BillingName,
+                patientAppointment.Quantity,
+                patientAppointment.Price
             });
         }
 
-        public async void SendMessageWithRabbitMQ(string messageType, string productName)
+        public async void SendMessageWithRabbitMQ(string messageType, string text)
         {
             var factory = new ConnectionFactory { HostName = "localhost" };
             using var connection = await factory.CreateConnectionAsync();
@@ -44,7 +44,7 @@ namespace CompanyApi.Services
             await channel.QueueDeclareAsync(queue: "hello", durable: false, exclusive: false, autoDelete: false,
                 arguments: null);
 
-            var body = Encoding.UTF8.GetBytes(productName);
+            var body = Encoding.UTF8.GetBytes(text);
 
             await channel.BasicPublishAsync(exchange: string.Empty, routingKey: "hello", body: body);
         }

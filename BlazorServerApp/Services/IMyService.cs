@@ -1,10 +1,10 @@
-﻿using CompanyApi.Models;
+﻿using PatientApi.Models;
 
 namespace BlazorServerApp.Services
 {
     public interface IMyService
     {
-        public void AddAccount(AccountDTO account);
-        public Task<List<AccountDTO>> GetAccounts();
+        public void AddPatient(PatientDTO patient);
+        public Task<List<PatientDTO>> GetPatients();
     }
 }

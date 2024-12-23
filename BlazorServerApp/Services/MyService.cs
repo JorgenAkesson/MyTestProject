@@ -1,4 +1,4 @@
-﻿using CompanyApi.Models;
+﻿using PatientApi.Models;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -16,26 +16,26 @@ namespace BlazorServerApp.Services
             _httpClientFactory=httpClientFactory;
         }
 
-        public void AddAccount(AccountDTO account)
+        public void AddPatient(PatientDTO patient)
         {
-            var jsonAccount = JsonContent.Create(account);
+            var jsonpatient = JsonContent.Create(patient);
             var httpClient = _httpClientFactory.CreateClient("Company");
-            httpClient.PostAsync("/api/Accounts", jsonAccount);
+            httpClient.PostAsync("/api/Patients", jsonpatient);
         }
 
-        public async Task<List<AccountDTO>> GetAccounts()
+        public async Task<List<PatientDTO>> GetPatients()
         {
             var httpClient = _httpClientFactory.CreateClient("Company");
-            var httpResponseMessage = await httpClient.GetAsync("/api/Accounts");
+            var httpResponseMessage = await httpClient.GetAsync("/api/Patients");
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 using var contentStream = await httpResponseMessage.Content.ReadAsStreamAsync();
 
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                var accounts = JsonSerializer.Deserialize<List<AccountDTO>>(contentStream, options);
+                var patients = JsonSerializer.Deserialize<List<PatientDTO>>(contentStream, options);
 
-                var a = accounts.ToList();
+                var a = patients.ToList();
                 return a;
             }
             return null;

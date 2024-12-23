@@ -1,25 +1,25 @@
 using BlazorBootstrap;
-using CompanyApi.Models;
 using Microsoft.AspNetCore.Components;
+using PatientApi.Models;
 
 namespace BlazorServerApp.Components.Shared
 {
     public partial class Table
     {
         [Parameter]
-        public List<AccountDTO> Accounts { get; set; }
+        public List<PatientDTO> Patients { get; set; }
 
-        Grid<AccountDTO> grid = default!;
-        private HashSet<AccountDTO> selectedAccount = new();
+        Grid<PatientDTO> grid = default!;
+        private HashSet<PatientDTO> selectedPatient = new();
 
-        private async Task<GridDataProviderResult<AccountDTO>> AccountDataProvider(GridDataProviderRequest<AccountDTO> request)
+        private async Task<GridDataProviderResult<PatientDTO>> PatientDataProvider(GridDataProviderRequest<PatientDTO> request)
         {
-            return await Task.FromResult(request.ApplyTo(Accounts));
+            return await Task.FromResult(request.ApplyTo(Patients));
         }
 
-        private Task OnSelectedItemsChanged(HashSet<AccountDTO> accounts)
+        private Task OnSelectedItemsChanged(HashSet<PatientDTO> patients)
         {
-            selectedAccount = accounts is not null && accounts.Any() ? accounts : new();
+            selectedPatient = patients is not null && patients.Any() ? patients : new();
             return Task.CompletedTask;
         }
 

@@ -1,5 +1,5 @@
-﻿using MassTransit;
-using ProductApp;
+﻿using BillingApp;
+using MassTransit;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -20,9 +20,9 @@ await channel.QueueDeclareAsync(queue: "hello", durable: false, exclusive: false
 
 var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
 {
-    cfg.ReceiveEndpoint("order-created-event", e =>
+    cfg.ReceiveEndpoint("billing-created-event", e =>
     {
-        e.Consumer<OrderCreatedConsumer>();
+        e.Consumer<BillingCreatedConsumer>();
     });
 
 });
@@ -36,10 +36,10 @@ await busControl.StartAsync(new CancellationToken());
 var consumer = new AsyncEventingBasicConsumer(channel);
 consumer.ReceivedAsync += (model, ea) =>
 {
-var body = ea.Body.ToArray();
-var message = Encoding.UTF8.GetString(body);
-Console.WriteLine($" [x] Received. {message}");
-return Task.CompletedTask;
+    var body = ea.Body.ToArray();
+    var message = Encoding.UTF8.GetString(body);
+    Console.WriteLine($" [x] Received. {message}");
+    return Task.CompletedTask;
 };
 await channel.BasicConsumeAsync("hello", autoAck: true, consumer: consumer);
 
@@ -54,17 +54,3 @@ finally
 {
     await busControl.StopAsync();
 }
-
-////var consumer = new AsyncEventingBasicConsumer(channel);
-////consumer.ReceivedAsync += (model, ea) =>
-////{
-////    var body = ea.Body.ToArray();
-////    var message = Encoding.UTF8.GetString(body);
-////    Console.WriteLine($" [x] Received {message}");
-////    return Task.CompletedTask;
-////};
-
-////await channel.BasicConsumeAsync("hello", autoAck: true, consumer: consumer);
-
-//Console.WriteLine(" Press [enter] to exit.");
-//Console.ReadLine();

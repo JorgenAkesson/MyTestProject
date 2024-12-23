@@ -1,10 +1,10 @@
 ﻿@using BlazorBootstrap
-@using CompanyApi.Models;
+@using PatientApi.Models;
 
 <Grid @ref="grid"
-      TItem="AccountDTO"
+      TItem="PatientDTO"
       Class="table table-hover table-bordered table-striped"
-      DataProvider="AccountDataProvider"
+      DataProvider="PatientDataProvider"
       AllowFiltering="true"
       AllowPaging="true"
       PageSize="5"
@@ -15,26 +15,26 @@
       Responsive="true">
 
     <GridColumns>
-        <GridColumn TItem="AccountDTO" HeaderText="Id" PropertyName="Id" SortKeySelector="item => item.Id">
+        <GridColumn TItem="PatientDTO" HeaderText="Id" PropertyName="Id" SortKeySelector="item => item.Id">
             @context.Id
         </GridColumn>
-        <GridColumn TItem="AccountDTO" HeaderText="Employee Name" PropertyName="Name" SortKeySelector="item => item.AccountName">
-            @context.AccountName
+        <GridColumn TItem="PatientDTO" HeaderText="Patient Name" PropertyName="Name" SortKeySelector="item => item.PatientName">
+            @context.PatientName
         </GridColumn>
     </GridColumns>
 
 </Grid>
 
 <div class="mt-3">
-    Selected Items Count: @selectedAccount.Count
+    Selected Items Count: @selectedPatient.Count
 </div>
 
 <div class="mt-2">
-    Selected Employees:
+    Selected Patients:
     <ul>
-        @foreach (var emp in selectedAccount)
+        @foreach (var emp in selectedPatient)
         {
-            <li>@emp.AccountName</li>
+            <li>@emp.PatientName</li>
         }
     </ul>
 </div>

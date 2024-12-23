@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpClient();
 //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["BackendUrl"])});
 builder.Services.AddHttpClient("Company", httpClient => { httpClient.BaseAddress = new Uri(builder.Configuration["BackendUrl"]);});
 

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyApi", "TodoApi\CompanyApi.csproj", "{E71B6C5F-DD3A-47E7-BC36-E5EBD573B91D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientApi", "TodoApi\PatientApi.csproj", "{E71B6C5F-DD3A-47E7-BC36-E5EBD573B91D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerApp", "BlazorServerApp\BlazorServerApp.csproj", "{E8D96086-F9DD-47B2-BC93-77A6C10DEE0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductAPI", "ProductAPI\ProductAPI.csproj", "{721214D0-8CD8-4766-8FF8-E2726DCF89EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillingAPI", "ProductAPI\BillingAPI.csproj", "{721214D0-8CD8-4766-8FF8-E2726DCF89EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductApp", "ProductApp\ProductApp.csproj", "{3979EFD7-E7FD-48A3-8BAD-B454E1403B30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillingApp", "ProductApp\BillingApp.csproj", "{3979EFD7-E7FD-48A3-8BAD-B454E1403B30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "SharedModels\SharedModels.csproj", "{1FD99045-9459-4EA3-8ED5-908FFF826E7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedModels", "SharedModels\SharedModels.csproj", "{1FD99045-9459-4EA3-8ED5-908FFF826E7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

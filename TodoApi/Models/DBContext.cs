@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
-namespace CompanyApi.Models;
+namespace PatientApi.Models;
 
 public class DBContext : DbContext
 {
@@ -10,15 +10,10 @@ public class DBContext : DbContext
     {
     }
 
-    public DbSet<Account> Accounts { get; set; } = null!;
-    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<Patient> Patients { get; set; } = null!;
+    public DbSet<Appointment> Appointments { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //modelBuilder.Entity<Order>()
-        //    .HasOne(e => e.Account)
-        //    .WithMany(e => e.Orders)
-        //    .HasForeignKey(e => e.AccountId)
-        //    .HasPrincipalKey(e => e.Id);
     }
 }

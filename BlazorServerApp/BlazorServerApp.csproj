@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TodoApi\CompanyApi.csproj" />
+    <ProjectReference Include="..\TodoApi\PatientApi.csproj" />
   </ItemGroup>
 
 </Project>
