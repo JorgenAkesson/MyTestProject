@@ -1,4 +1,6 @@
-﻿using RabbitMQ.Client;
+﻿using MassTransit;
+using ProductApp;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
@@ -16,18 +18,53 @@ using var channel = await connection.CreateChannelAsync();
 await channel.QueueDeclareAsync(queue: "hello", durable: false, exclusive: false, autoDelete: false,
     arguments: null);
 
+var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
+{
+    cfg.ReceiveEndpoint("order-created-event", e =>
+    {
+        e.Consumer<OrderCreatedConsumer>();
+    });
+
+});
+
 Console.WriteLine(" [*] Waiting for messages.");
 
+// Start Masstransit RabbitMQ
+await busControl.StartAsync(new CancellationToken());
+
+// Start RabbitMQ
 var consumer = new AsyncEventingBasicConsumer(channel);
 consumer.ReceivedAsync += (model, ea) =>
 {
-    var body = ea.Body.ToArray();
-    var message = Encoding.UTF8.GetString(body);
-    Console.WriteLine($" [x] Received {message}");
-    return Task.CompletedTask;
+var body = ea.Body.ToArray();
+var message = Encoding.UTF8.GetString(body);
+Console.WriteLine($" [x] Received. {message}");
+return Task.CompletedTask;
 };
-
 await channel.BasicConsumeAsync("hello", autoAck: true, consumer: consumer);
 
-Console.WriteLine(" Press [enter] to exit.");
-Console.ReadLine();
+
+try
+{
+    Console.WriteLine("Press enter to exit");
+
+    await Task.Run(() => Console.ReadLine());
+}
+finally
+{
+    await busControl.StopAsync();
+}
+
+////var consumer = new AsyncEventingBasicConsumer(channel);
+////consumer.ReceivedAsync += (model, ea) =>
+////{
+////    var body = ea.Body.ToArray();
+////    var message = Encoding.UTF8.GetString(body);
+////    Console.WriteLine($" [x] Received {message}");
+////    return Task.CompletedTask;
+////};
+
+////await channel.BasicConsumeAsync("hello", autoAck: true, consumer: consumer);
+
+//Console.WriteLine(" Press [enter] to exit.");
+//Console.ReadLine();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CompanyApi.Models;
 using CompanyApi.Services;
+using MassTransit;
 
 namespace CompanyApi.Controllers
 {
@@ -82,7 +83,7 @@ namespace CompanyApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Accounts1
+        // POST: api/Accounts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO dto)
@@ -93,13 +94,14 @@ namespace CompanyApi.Controllers
 
             if(dto.Orders.Any())
             {
-                _messageService.SendMessageDirectWithRabbitMQ("NewProduct", "ProductName");
+                _messageService.SendMessageWithRabbitMQ("NewProduct", "ProductName");
+                _messageService.SendMessageWithMassTransit(dto);
             }
 
             return CreatedAtAction("GetAccount", new { id = account.Id }, dto);
         }
 
-        // DELETE: api/Accounts1/5
+        // DELETE: api/Accounts/5
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteAccount(int id)
         {

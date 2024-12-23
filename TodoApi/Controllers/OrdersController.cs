@@ -89,7 +89,7 @@ namespace CompanyApi.Controllers
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
-            _messageService.SendMessageDirectWithRabbitMQ("NewProduct", "ProductName");
+            _messageService.SendMessageWithRabbitMQ("NewProduct", "ProductName");
 
             return CreatedAtAction("GetOrder", new { id = order.Id }, dto);
         }
