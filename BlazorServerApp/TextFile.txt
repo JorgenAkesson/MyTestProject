@@ -10,3 +10,9 @@ https://code-maze.com/masstransit-rabbitmq-aspnetcore/
 
 Create a web API with ASP.NET Core
 https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-9.0&tabs=visual-studio
+
+How to create a virtual directory in IIS Express
+https://josephwoodward.co.uk/2014/01/how-to-create-a-virtual-directory-in-iis-express
+
+Rest API Call In Angular Application
+https://medium.com/@sandeep15mca/rest-api-call-in-angular-application-289d907020ff
