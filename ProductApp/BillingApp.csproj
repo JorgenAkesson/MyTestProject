@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProductAPI\BillingAPI.csproj" />
+    <ProjectReference Include="..\BillingAPI\BillingAPI.csproj" />
     <ProjectReference Include="..\SharedModels\SharedModels.csproj" />
   </ItemGroup>
 
