@@ -15,7 +15,7 @@ namespace BlazorServerApp.Components.Pages
 
         private Table child;
 
-        private string Header = "Welcome to your new app.";
+        private string Header = "Welcome to handle patients.";
         private List<PatientDTO> patients = new List<PatientDTO>();
 
         protected override Task OnInitializedAsync()

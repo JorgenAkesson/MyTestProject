@@ -36,8 +36,19 @@ namespace PatientApi.Services
             //    patientAppointment.Price
             //});
 
-            Response<BillingCreatedResponse> resp = await _getBillingCretedClient.GetResponse<BillingCreatedResponse>(new BillingCreatedRequest() { 
-                PatientName = dto.PatientName, Price = 100, Quantity = 1  });
+            try
+            {
+                Response<BillingCreatedResponse> resp = await _getBillingCretedClient.GetResponse<BillingCreatedResponse>(new BillingCreatedRequest()
+                {
+                    PatientName = dto.PatientName,
+                    Price = 100,
+                    Quantity = 1
+                });
+
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public async void SendMessageWithRabbitMQ(string messageType, string text)

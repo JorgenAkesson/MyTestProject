@@ -29,7 +29,7 @@ var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
 
 Console.WriteLine(" [*] Waiting for messages.");
 
-// Start Masstransit RabbitMQ
+// Start Masstransit via RabbitMQ
 await busControl.StartAsync(new CancellationToken());
 
 // Start RabbitMQ

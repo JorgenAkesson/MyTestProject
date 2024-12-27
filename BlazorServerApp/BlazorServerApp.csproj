@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\Shared\**" />
+    <Content Remove="Components\Shared\**" />
+    <EmbeddedResource Remove="Components\Shared\**" />
+    <None Remove="Components\Shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazor.Bootstrap" Version="3.2.0" />
     <PackageReference Include="Castle.Windsor" Version="6.0.0" />
   </ItemGroup>
