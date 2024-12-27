@@ -3,21 +3,27 @@
 @inject HttpClient Http
 @rendermode InteractiveServer
 
-<PageTitle>Home</PageTitle>
+<form @onsubmit="Submit" @formname="main-form">
+    <PageTitle>Home</PageTitle>
 
-<h1>Patients</h1>
+    <h1>Patients</h1>
 
-<p>
-    @Header
-</p>
-<p>
-    <button @onclick="AddPatient">
-        Add Patient
-    </button>
-</p>
-<p>
-    <button @onclick="GetPatients">
-        Get Patients
-    </button>
-</p>
-<Table Patients=@patients @ref="child"/>
+    <p>
+        @Model?.Header
+    </p>
+
+    <p>
+        <label>
+            <InputText @bind-Value="Model!.PatientName" />
+        </label>
+        <button @onclick="AddPatient">
+            Add Patient
+        </button>
+    </p>
+    <p>
+        <button @onclick="GetPatients">
+            Get Patients
+        </button>
+    </p>
+    <Table Patients=@patients @ref="child" />
+</form>
