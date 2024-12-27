@@ -95,7 +95,7 @@ namespace PatientApi.Controllers
             if (dto.Appointments.Any())
             {
                 //_messageService.SendMessageWithRabbitMQ("NewBilling", "BillingName");
-                _messageService.SendMessageWithMassTransit(dto);
+                _messageService.SendBillingCreatedMessageWithMassTransit(dto);
             }
 
             return CreatedAtAction("GetPatient", new { id = patient.Id }, dto);

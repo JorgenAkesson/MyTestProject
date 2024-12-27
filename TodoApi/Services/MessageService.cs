@@ -12,27 +12,32 @@ namespace PatientApi.Services
         // https://www.youtube.com/watch?v=KhYiaEOrw7Q
 
         private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IRequestClient<BillingCreatedRequest> _getBillingCretedClient;
 
-        public MessageService(IPublishEndpoint publishEndpoint)
+        public MessageService(IPublishEndpoint publishEndpoint, IRequestClient<BillingCreatedRequest> getBillingCretedRequestClient)
         {
             _publishEndpoint=publishEndpoint;
+            _getBillingCretedClient=getBillingCretedRequestClient;
         }
 
-        public async void SendMessageWithMassTransit(PatientDTO dto)
+        public async void SendBillingCreatedMessageWithMassTransit(PatientDTO dto)
         {
-            var patientAppointment = new BillingDTO()
-            {
-                BillingName = dto.PatientName,
-                Quantity = 1,
-                Price = 2
-            };
-            await _publishEndpoint.Publish<BillingCreated>(new
-            {
-                Id = 1,
-                patientAppointment.BillingName,
-                patientAppointment.Quantity,
-                patientAppointment.Price
-            });
+            //var patientAppointment = new BillingDTO()
+            //{
+            //    BillingName = dto.PatientName,
+            //    Quantity = 1,
+            //    Price = 2
+            //};
+            //await _publishEndpoint.Publish<BillingCreatedRequest>(new
+            //{
+            //    Id = 1,
+            //    patientAppointment.BillingName,
+            //    patientAppointment.Quantity,
+            //    patientAppointment.Price
+            //});
+
+            Response<BillingCreatedResponse> resp = await _getBillingCretedClient.GetResponse<BillingCreatedResponse>(new BillingCreatedRequest() { 
+                PatientName = dto.PatientName, Price = 100, Quantity = 1  });
         }
 
         public async void SendMessageWithRabbitMQ(string messageType, string text)

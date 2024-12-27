@@ -89,7 +89,7 @@ namespace PatientApi.Controllers
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
 
-            _messageService.SendMessageWithRabbitMQ("NewBilling", "BillingName");
+            _messageService.SendMessageWithRabbitMQ("NewBilling", "PatientName");
 
             return CreatedAtAction("GetAppointment", new { id = appointment.Id }, dto);
         }

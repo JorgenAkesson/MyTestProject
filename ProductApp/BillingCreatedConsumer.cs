@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace BillingApp
 {
-    class BillingCreatedConsumer : IConsumer<BillingCreated>
+    class BillingCreatedConsumer : IConsumer<BillingCreatedRequest>
     {
-        public async Task Consume(ConsumeContext<BillingCreated> context)
+        public async Task Consume(ConsumeContext<BillingCreatedRequest> context)
         {
             var jsonMessage = JsonConvert.SerializeObject(context.Message);
-            Console.WriteLine($" [x] Received. BillingCreated message: {jsonMessage}");
+            Console.WriteLine($" [x] Received. BillingCreatedRequest message: {jsonMessage}");
 
-            var billing = new Billing() { BillingName = context.Message.BillingName };
+            var billing = new Billing() { BillingName = context.Message.PatientName, Price = context.Message.Price, Quantity = context.Message.Quantity };
             var sc = JsonContent.Create(billing);
 
             // Call Billing API
@@ -33,6 +33,7 @@ namespace BillingApp
                 if (response.IsSuccessStatusCode)
                 {
                     var users = await response.Content.ReadAsStringAsync();
+                    await context.RespondAsync(new BillingCreatedResponse() { StatusMessage = "Billing successfully created." });
                 }
             }
         }
