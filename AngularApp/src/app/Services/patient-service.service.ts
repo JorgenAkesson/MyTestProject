@@ -7,5 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class PatientService {
 
-  constructor() { }
+  private apiUrl = 'https://localhost:7120/api/Patients';
+
+  constructor(private http: HttpClient) { }
+
+  fetchPatients(): Observable<any[]> {
+      return this.http.get<any[]>(this.apiUrl); 
+  }
+
+  createPatient(patient: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(this.apiUrl, patient, { headers });
+}
 }
