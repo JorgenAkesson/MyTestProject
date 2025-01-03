@@ -1,21 +1,40 @@
-<h1>{{ title }}</h1>
-
+<br>
+<h1>Patients</h1>
 <table mat-table [dataSource]="patients" class="mat-elevation-z8">
 
     <!-- Position Column -->
     <ng-container matColumnDef="Id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.id}} </td>
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="PatientName">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.PatientName}} </td>
+      <th mat-header-cell *matHeaderCellDef> Patient Name </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.patientName}} </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
+</table>
+<br>
+
+<h1>Billings</h1>
+<table mat-table [dataSource]="billings" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let billing"> {{billing.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="PatientName">
+    <th mat-header-cell *matHeaderCellDef> Patient Name </th>
+    <td mat-cell *matCellDef="let billing"> {{billing.patientName}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedBillingsColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedBillingsColumns;"></tr>
+</table>
   

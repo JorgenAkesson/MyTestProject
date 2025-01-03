@@ -12,11 +12,11 @@ export class PatientService {
   constructor(private http: HttpClient) { }
 
   fetchPatients(): Observable<any[]> {
-      return this.http.get<any[]>(this.apiUrl); 
+      return this.http.get<any[]>('/api/Patients'); 
   }
 
   createPatient(patient: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(this.apiUrl, patient, { headers });
-}
+  }
 }

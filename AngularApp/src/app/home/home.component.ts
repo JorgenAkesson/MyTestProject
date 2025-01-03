@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientService} from '../Services/patient-service.service';
+import { BillingsService } from '../Services/billing-service.service';
 
 interface Patient {
   Id: number;
   PatientName: string;
+}
+
+interface Billing {
+  Id: number;
+  PatientName: string;
+  // price: number;
+  // quantity: number;
 }
 
 @Component({
@@ -14,27 +22,33 @@ interface Patient {
 export class HomeComponent implements OnInit {
   title = 'MyHomePage';
   patients: Patient[] = [];
+  billings: Billing[] = [];
   displayedColumns: string[] = ['Id', 'PatientName'];
+  displayedBillingsColumns: string[] = ['Id', 'PatientName'];
  
-  constructor(private patientService: PatientService){}
+  constructor(private patientService: PatientService, private BillingsService: BillingsService){}
 
   ngOnInit(): void {
-    this.patients = DATA;
+    //this.patients = DATA;
+    this.fetchBillings();
     //this.createPatient();
-    //this.fetchPatients();
+    this.fetchPatients();
   }
 
   fetchPatients() {
-    this.patientService.fetchPatients()
-        .subscribe(
-            (response) => {
-                this.patients = response;
-            },
-            (error) => {
-                console.error(error);
-            }
-        );
+    this.patientService.fetchPatients().subscribe({
+      next: (data) => {
+          this.patients = data;
+      },
+      error: (error) => {
+          console.log(error)
+      },
+      complete: () => {
+          console.log('complete')
+      }
+    })  
   }
+  
 
   createPatient() {
     this.patientService.createPatient(DATA[0])
@@ -48,6 +62,20 @@ export class HomeComponent implements OnInit {
                 console.error(error);
             }
         );
+  }
+
+  fetchBillings() {
+    this.BillingsService.fetchBillings().subscribe({
+      next: (data) => {
+          this.billings = data;
+      },
+      error: (error) => {
+          console.log(error)
+      },
+      complete: () => {
+          console.log('complete')
+      }
+    })  
   }
 }
 

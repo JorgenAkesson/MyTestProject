@@ -20,7 +20,10 @@ namespace BillingApp
             var jsonMessage = JsonConvert.SerializeObject(context.Message);
             Console.WriteLine($" [x] Received. BillingCreatedRequest message: {jsonMessage}");
 
-            var billing = new Billing() { PatientName = context.Message.PatientName, Price = context.Message.Price, Quantity = context.Message.Quantity };
+            var billing = new Billing() { PatientName = context.Message.PatientName, 
+                //Price = context.Message.Price, 
+                //Quantity = context.Message.Quantity
+            };
             var sc = JsonContent.Create(billing);
 
             // Call Billing API

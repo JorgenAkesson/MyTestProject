@@ -1,0 +1,14 @@
+{
+    "/api/Billings":{
+        "target": "https://localhost:7252",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    "/api/Patients":{
+        "target": "https://localhost:7120",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
