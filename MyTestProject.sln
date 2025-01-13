@@ -13,28 +13,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillingApp", "BillingApp\Bi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientApi", "PatientApi\PatientApi.csproj", "{28D716F2-6F6B-4250-8110-FF15F2BBA8DB}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AngularApp", "AngularApp\", "{B25D97FA-0983-4BE8-A8CD-EF5D9B04E9AB}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BillingReactApp", "ReactApp\BillingReactApp.esproj", "{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BillingAngularApp", "BillingAngularApp\", "{2ED954BA-94A8-412B-BF30-12CE3E79E0EE}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_51270"
-		Debug.AspNetCompiler.PhysicalPath = "AngularApp\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51270\"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_56848"
+		Debug.AspNetCompiler.PhysicalPath = "BillingAngularApp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56848\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_51270"
-		Release.AspNetCompiler.PhysicalPath = "AngularApp\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51270\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_56848"
+		Release.AspNetCompiler.PhysicalPath = "BillingAngularApp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56848\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "51270"
-		SlnRelativePath = "AngularApp\"
+		VWDPort = "56848"
+		SlnRelativePath = "BillingAngularApp\"
 	EndProjectSection
-EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BillingReactApp", "ReactApp\BillingReactApp.esproj", "{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,16 +62,16 @@ Global
 		{28D716F2-6F6B-4250-8110-FF15F2BBA8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28D716F2-6F6B-4250-8110-FF15F2BBA8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28D716F2-6F6B-4250-8110-FF15F2BBA8DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B25D97FA-0983-4BE8-A8CD-EF5D9B04E9AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B25D97FA-0983-4BE8-A8CD-EF5D9B04E9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B25D97FA-0983-4BE8-A8CD-EF5D9B04E9AB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{B25D97FA-0983-4BE8-A8CD-EF5D9B04E9AB}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2ED954BA-94A8-412B-BF30-12CE3E79E0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED954BA-94A8-412B-BF30-12CE3E79E0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED954BA-94A8-412B-BF30-12CE3E79E0EE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED954BA-94A8-412B-BF30-12CE3E79E0EE}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
