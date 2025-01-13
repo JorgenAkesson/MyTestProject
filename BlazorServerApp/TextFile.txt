@@ -19,3 +19,6 @@ https://medium.com/@sandeep15mca/rest-api-call-in-angular-application-289d907020
 
 Angular Material components
 https://material.angular.io/components/table/overview#getting-started
+
+Create a React app in Visual Studio
+https://learn.microsoft.com/en-us/visualstudio/javascript/create-react-app?view=vs-2022

@@ -34,6 +34,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AngularApp", "AngularApp\",
 		SlnRelativePath = "AngularApp\"
 	EndProjectSection
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BillingReactApp", "ReactApp\BillingReactApp.esproj", "{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,12 @@ Global
 		{B25D97FA-0983-4BE8-A8CD-EF5D9B04E9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B25D97FA-0983-4BE8-A8CD-EF5D9B04E9AB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{B25D97FA-0983-4BE8-A8CD-EF5D9B04E9AB}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DA21D46-E724-46C8-BD51-28AB36BB2C9F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
