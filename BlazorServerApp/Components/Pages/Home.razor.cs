@@ -30,6 +30,7 @@ namespace BlazorServerApp.Components.Pages
 
         private async void Init()
         {
+            GetPatients(null);
         }
 
         private async void GetPatients(MouseEventArgs e)

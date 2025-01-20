@@ -1,13 +1,16 @@
 using MassTransit;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PatientApi.Models;
 using PatientApi.Services;
+using System.Configuration;
 using System.Text.Json.Serialization;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 builder.Services.AddCors(options =>
 {
@@ -21,7 +24,7 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
-builder.Services.AddDbContext<DBContext>(opt => opt.UseInMemoryDatabase("PatientDB"));
+builder.Services.AddDbContext<DBContext>(options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
