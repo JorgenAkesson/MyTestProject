@@ -36,6 +36,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BillingAngularApp", "Billin
 		SlnRelativePath = "BillingAngularApp\"
 	EndProjectSection
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BillingReactAppTypeScript", "BillingReactAppTypeScript\BillingReactAppTypeScript.esproj", "{F6DFC768-31A7-48F3-A5A5-6DEAC0250CD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,12 @@ Global
 		{2ED954BA-94A8-412B-BF30-12CE3E79E0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ED954BA-94A8-412B-BF30-12CE3E79E0EE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{2ED954BA-94A8-412B-BF30-12CE3E79E0EE}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F6DFC768-31A7-48F3-A5A5-6DEAC0250CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6DFC768-31A7-48F3-A5A5-6DEAC0250CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6DFC768-31A7-48F3-A5A5-6DEAC0250CD3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F6DFC768-31A7-48F3-A5A5-6DEAC0250CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DFC768-31A7-48F3-A5A5-6DEAC0250CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6DFC768-31A7-48F3-A5A5-6DEAC0250CD3}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
