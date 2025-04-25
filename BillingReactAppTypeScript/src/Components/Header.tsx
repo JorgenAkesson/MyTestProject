@@ -2,6 +2,9 @@ import { AppBar, Button, Toolbar } from "@mui/material";
 
 const headersData = [
     {
+        label: "Home",
+        href: "/",
+    },    {
         label: "Test",
         href: "/test",
     },
@@ -41,7 +44,7 @@ function Header() {
     return (
         <>
             <header>
-                <AppBar>{displayDesktop()}
+                <AppBar position="static">{displayDesktop()}
                 </AppBar>
             </header>
         </>

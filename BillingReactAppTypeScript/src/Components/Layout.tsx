@@ -9,9 +9,7 @@ function Layout({ children }: Props) {
     return (
         <>
             <Header></Header>
-            <div style={{ width: '100%', background: '#f9f9f9' }} >
-                {children}
-            </div>
+            {children}
         </>
     )
 }
