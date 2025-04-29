@@ -1,12 +1,13 @@
-import { Alert, Button, Input } from "@mui/material";
+import { Button, Input } from "@material-ui/core";
+import { Alert } from "@mui/material";
 import { useState } from "react";
 
 function Test() {
 
     const [variable, setValue] = useState("Kalle");
-    //const handleChange = e => {
-    //    setValue(e.target.value);
-    //};
+    const handleChange = (e: React.ChangeEvent<any>) => {
+        setValue(e.target.value);
+    };
     const [alertVisible, setAlertVisibility] = useState(false);
 
     function DoSomething() {
@@ -16,8 +17,8 @@ function Test() {
     return (
         <>
             <div>
-                <Input defaultValue={variable}/>
-                    {/*onChange={handleChange} />*/}
+                <Input defaultValue={variable}
+                    onChange={handleChange} />
                 <Button
                     onClick={DoSomething}>Test
                 </Button>

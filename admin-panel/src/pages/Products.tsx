@@ -5,7 +5,6 @@ import CustomTable from "../components/tables/customTable/CustomTable";
 import { IProductsTable } from "../interfaces/Itable";
 import { products, productsHeader } from "../constants/tables";
 import LoadingSpinner from "../components/UI/loadingSpinner/LoadingSpinner";
-import Dropdown from "../components/UI/dropdown/Dropdown";
 
 const url =
   "https://admin-panel-79c71-default-rtdb.europe-west1.firebasedatabase.app/products.json";

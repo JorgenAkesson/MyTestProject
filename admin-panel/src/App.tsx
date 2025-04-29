@@ -14,6 +14,8 @@ const ProductEdit = React.lazy(() => import("./pages/ProductEdit"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 const BlankPage = React.lazy(() => import("./pages/BlankPage"));
 const Login = React.lazy(() => import("./pages/Login"));
+const Billing = React.lazy(() => import("./components/MyComponents/Billing"));
+const Test = React.lazy(() => import("./components/MyComponents/Test"));
 
 function App() {
     return (
@@ -26,6 +28,8 @@ function App() {
                             <Route path="/customers" element={<Customers />} />
                             <Route path="/customers/:customerId" element={<CustomerEdit />} />
                             <Route path="/products" element={<Products />} />
+                            <Route path="/billing" element={<Billing />} />
+                            <Route path="/test" element={<Test />} />
                             <Route path="/products/:productId" element={<ProductEdit />} />
                             <Route path="/orders" element={<BlankPage />} />
                             <Route path="/analytics" element={<BlankPage />} />

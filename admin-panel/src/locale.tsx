@@ -15,6 +15,8 @@ i18n
           dashboard: "Dashboard",
           orders: "Orders",
           products: "Products",
+          test: "Test",
+          billing: "Billing",
           customers: "Customers",
           analytics: "Analytics",
           discount: "Discount",
